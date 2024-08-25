@@ -12,7 +12,6 @@ public final class MemStore<T extends Base> implements Store<T> {
         if (!storage.containsKey(model.getId())) {
             storage.put(model.getId(), model);
         }
-//        storage.get(model.getId() )
     }
 
     @Override
