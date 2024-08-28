@@ -10,25 +10,20 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     private static final int DEFAULT_CAPACITY = 10;
 
     public SimpleArrayList(int capacity) {
-        if (capacity > 0) {
-            this.container = (T[]) new Object[capacity];
-        } else if (capacity == 0) {
-            this.container = (T[]) new Object[DEFAULT_CAPACITY];
-        } else {
-            throw new IllegalArgumentException("Illegal Capacity: "
-                    + capacity);
-        }
+        container = (T[]) new Object[capacity];
     }
 
-    public void increaseSize() {
-        if (size == container.length) {
+    private void increaseCapacity() {
+        if (container.length == 0) {
+            this.container = (T[]) new Object[DEFAULT_CAPACITY];
+        } else if (size == container.length) {
             container = Arrays.copyOf(container, container.length * 2);
         }
     }
 
     @Override
     public void add(T value) {
-        increaseSize();
+        increaseCapacity();
         container[size] = value;
         size++;
         modCount++;
@@ -36,7 +31,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, container.length);
         T oldValue = get(index);
         container[index] = newValue;
         return oldValue;
@@ -44,7 +38,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, container.length);
         T oldValue = get(index);
         System.arraycopy(
                 container,
