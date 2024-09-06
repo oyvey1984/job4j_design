@@ -15,9 +15,9 @@ public class Binary {
         int a = 6;
         int b = 4;
 
-        a = a + b; // 6 + 4 = 10
-        b = a - b; // 10 - 4 = 6
-        a = a - b;  // 10 - 6 = 4
+        a = a + b;
+        b = a - b;
+        a = a - b;
         System.out.println("a: " + a + System.lineSeparator() + "b: " + b);
 
         int c = 5;
