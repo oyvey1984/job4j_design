@@ -31,6 +31,9 @@ public class Binary {
         System.out.println(findNumberOfBits(12, 16));
 
         Map<Integer, String> map = new HashMap<>();
+
+        System.out.println(17 & 15);
+        System.out.println(1 & 15);
     }
 
     public static int findNumberOfBits(int x, int y) {
