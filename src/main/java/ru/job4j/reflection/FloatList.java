@@ -11,10 +11,10 @@ public class FloatList extends ArrayList<Float> {
         System.out.println(actualClass);
 
         ParameterizedType type = (ParameterizedType) actualClass.getGenericSuperclass();
-        System.out.println(type); // java.util.ArrayList<java.lang.Float>
+        System.out.println(type);
 
         Class parameter = (Class) type.getActualTypeArguments()[0];
-        System.out.println(parameter); // class java.lang.Float
+        System.out.println(parameter);
     }
 
     public static void main(String[] args) {
