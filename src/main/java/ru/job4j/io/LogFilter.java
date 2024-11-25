@@ -21,7 +21,7 @@ public class LogFilter {
                     .filter(string -> {
                 boolean rsl = false;
                 String[] str = string.split(" ");
-                if (str[str.length - 2].equals("404")) {
+                if (("404").equals(str[str.length - 2])) {
                     rsl = true;
                 }
                 return rsl;
