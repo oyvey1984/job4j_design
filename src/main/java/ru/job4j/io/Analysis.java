@@ -14,11 +14,11 @@ public class Analysis {
                 String[] parts = line.split(" ");
                 String status = parts[0];
                 String time = parts[1];
-                if (!serverDown && (status.equals("400") || status.equals("500"))) {
+                if (!serverDown && ("400".equals(status) || "500".equals(status))) {
                     serverDown = true;
                     start = time;
                 }
-                if (serverDown && (status.equals("200") || status.equals("300"))) {
+                if (serverDown && ("200".equals(status) || "300".equals(status))) {
                     serverDown = false;
                     writer.println(start + ";" + time + ";");
                 }
