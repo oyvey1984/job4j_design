@@ -12,7 +12,7 @@ public class Dir {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Это не директория: %s", file.getAbsoluteFile()));
         }
-
+        
         File[] files = file.listFiles();
             if (files == null) {
                 throw new NullPointerException("Ошибка: метод listFiles() вернул null");
