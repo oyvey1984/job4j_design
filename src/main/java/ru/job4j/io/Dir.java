@@ -4,24 +4,19 @@ import java.io.File;
 
 public class Dir {
     public static void main(String[] args) {
-        File file = new File("C:\\projects\\job4j_design\\data");
-
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Root folder is null. Usage ROOT_FOLDR.");
+        }
+        File file = new File(args[0]);
         if (!file.exists()) {
-            throw new IllegalArgumentException(String.format("Директория не существует: %s", file.getAbsoluteFile()));
+            throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
         if (!file.isDirectory()) {
-            throw new IllegalArgumentException(String.format("Это не директория: %s", file.getAbsoluteFile()));
+            throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
-        
-        File[] files = file.listFiles();
-            if (files == null) {
-                throw new NullPointerException("Ошибка: метод listFiles() вернул null");
-            }
-        for (File subfile : files) {
-            if (subfile.isFile()) {
-                System.out.printf("Файл: %s%nРазмер файла: %s%n%n",
-                        subfile.getName(), subfile.length());
-            }
+        System.out.printf("size : %s%n", file.getTotalSpace());
+        for (File subfile : file.listFiles()) {
+            System.out.println(subfile.getName());
         }
     }
 }
