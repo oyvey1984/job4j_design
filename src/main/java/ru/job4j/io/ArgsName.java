@@ -3,7 +3,6 @@ package ru.job4j.io;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
@@ -12,7 +11,6 @@ public class ArgsName {
         if (!values.containsKey(key)) {
             throw new IllegalArgumentException("This key: '" + key + "' is missing");
         }
-        /* TODO add the necessary checks. */
         return values.get(key);
     }
 
@@ -23,7 +21,6 @@ public class ArgsName {
     }
 
     public static ArgsName of(String[] args) {
-        /* TODO add the necessary checks. */
         if (args.length == 0) {
             throw new IllegalArgumentException("Arguments not passed to program");
         }
