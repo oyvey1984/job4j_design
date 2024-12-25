@@ -7,7 +7,8 @@ import java.util.List;
 public class UsageEncoding {
     public String readFile(String path) {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(path, Charset.forName("WINDOWS-1251")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(
+                path, Charset.forName("WINDOWS-1251")))) {
             reader.lines()
                     .map(string -> string + System.lineSeparator())
                     .forEach(builder::append);
@@ -18,7 +19,8 @@ public class UsageEncoding {
     }
 
     public void writeDataInFile(String path, List<String> data) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
+        try (PrintWriter writer = new PrintWriter(
+                new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
             data.forEach(writer::println);
         } catch (IOException e) {
             e.printStackTrace();
