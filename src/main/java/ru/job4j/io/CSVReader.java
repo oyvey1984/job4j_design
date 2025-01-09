@@ -26,33 +26,27 @@ public class CSVReader {
         ArrayList<Integer> indexesInSource = new ArrayList<>();
         Arrays.stream(filters).forEach(filter -> indexesInSource.add(sourceLines.get(0).indexOf(filter)));
 
-        if ("stdout".equals(argsName.get("out"))) {
-            for (ArrayList<String> array : sourceLines) {
-                for (int index = 0; index < indexesInSource.size(); index++) {
-                    if (index != indexesInSource.size() - 1) {
-                        System.out.print(array.get(indexesInSource.get(index)) + delimiter);
-                    } else {
-                        System.out.print(array.get(indexesInSource.get(index)));
-                    }
+        try (PrintWriter writer = "stdout".equals(argsName.get("out"))
+                ? new PrintWriter(System.out, true)
+                : new PrintWriter(new FileWriter(target, StandardCharsets.UTF_8, true))) {
+            writeOutput(sourceLines, indexesInSource, delimiter, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeOutput(List<ArrayList<String>> sourceLines,
+                             List<Integer> indexesInSource,
+                             String delimiter,
+                             PrintWriter writer) {
+        for (ArrayList<String> array : sourceLines) {
+            for (int index = 0; index < indexesInSource.size(); index++) {
+                writer.print(array.get(indexesInSource.get(index)));
+                if (index != indexesInSource.size() - 1) {
+                    writer.print(delimiter);
                 }
-                System.out.println();
             }
-        } else {
-            try (PrintWriter writer = new PrintWriter(
-                    new FileWriter(target, StandardCharsets.UTF_8, true))) {
-                for (ArrayList<String> array : sourceLines) {
-                    for (int index = 0; index < indexesInSource.size(); index++) {
-                        if (index != indexesInSource.size() - 1) {
-                            writer.print(array.get(indexesInSource.get(index)) + delimiter);
-                        } else {
-                            writer.print(array.get(indexesInSource.get(index)));
-                        }
-                    }
-                    writer.println();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            writer.println();
         }
     }
 
