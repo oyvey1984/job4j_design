@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
@@ -19,18 +18,14 @@ public class EchoServer {
                     output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
                         System.out.println(string);
-                    }
-                    output.flush();
-
-                    Scanner scanner = new Scanner(System.in);
-                    while (!server.isClosed()) {
-                        String answer = scanner.nextLine();
-                        if (answer != null && answer.contains("msg=Bye")) {
-                            output.write("curl -i http://localhost:9000/?msg=Bye\r\n\r\n".getBytes());
+                        if (string.contains("msg=Bye")) {
+                            System.out.println("Server is shutting down...");
+                            output.write("Server is shutting down...\r\n\r\n".getBytes());
                             output.flush();
                             server.close();
                         }
                     }
+                    output.flush();
                 }
             }
         }
