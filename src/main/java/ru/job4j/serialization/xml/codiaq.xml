@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<kodiaq diesel="true" clearance="188" wheelDrive="all wheel drive">
+    <engine fuelBrand="Diesel" horsepower="180"/>
+    <sizes>
+        <size>Length: 4697 mm</size>
+        <size>Width: 1882 mm</size>
+        <size>Height: 1655 mm</size>
+    </sizes>
+</kodiaq>
