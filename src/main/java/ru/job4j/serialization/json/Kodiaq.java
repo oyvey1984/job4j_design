@@ -17,6 +17,26 @@ public class Kodiaq {
         this.size = size;
     }
 
+    public boolean isDiesel() {
+        return diesel;
+    }
+
+    public int getClearance() {
+        return clearance;
+    }
+
+    public String getWheelDrive() {
+        return wheelDrive;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public String[] getSize() {
+        return size;
+    }
+
     @Override
     public String toString() {
         return "Kodiaq{"

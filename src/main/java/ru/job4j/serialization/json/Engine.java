@@ -9,6 +9,14 @@ public class Engine {
         this.horsepower = horsepower;
     }
 
+    public String getFuelBrand() {
+        return fuelBrand;
+    }
+
+    public int getHorsepower() {
+        return horsepower;
+    }
+
     @Override
     public String toString() {
         return "Engine{"
