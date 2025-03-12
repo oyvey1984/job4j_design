@@ -71,3 +71,16 @@ SELECT ct.name
 FROM car_transmissions ct
 LEFT JOIN cars c ON ct.id = c.transmission_id
 WHERE c.id IS NULL;
+
+create view show_cars_with_automatic_transmissions
+as
+select c.name as car_name, ct.name as car_transmission, cb.name as car_bodie, ce.name as car_engine
+from cars c
+join car_transmissions ct on c.transmission_id = ct.id
+join car_bodies cb on c.body_id = cb.id
+join car_engines ce on c.engine_id = ce.id
+where ct.name = 'Automatic'
+order by c.name desc;
+
+select * from show_cars_with_automatic_transmissions;
+
