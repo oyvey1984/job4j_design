@@ -133,3 +133,38 @@ create trigger history
 
 insert into products (name, producer, count, price)
 VALUES ('product_6', 'producer_1', 700, 10000);
+
+create
+or replace procedure delete_data(tax float, u_id integer)
+language 'plpgsql'
+as $$
+    BEGIN
+        if
+            tax > 50 THEN
+			delete from products where id = u_id;
+        end if;
+    END;
+$$;
+
+call delete_data(51, 6);
+
+create
+or replace function f_delete_data(tax float, u_id integer)
+returns integer
+language 'plpgsql'
+as
+$$
+    declare
+        result integer;
+    begin
+        if tax > 70 THEN
+			delete from products
+			where id = u_id;
+			select into result sum(count)
+			from products;
+        end if;
+        return result;
+    end;
+$$;
+
+select f_delete_data(71, 4);
