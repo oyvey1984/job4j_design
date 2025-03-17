@@ -88,10 +88,8 @@ or replace function surfax2()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price * 1.18
-        where id = new.id;
-        return NEW;
+	    NEW.price = NEW.price * 1.2;
+	    return NEW;
     END;
 $$
 LANGUAGE 'plpgsql';
