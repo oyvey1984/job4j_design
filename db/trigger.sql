@@ -166,3 +166,12 @@ $$
 $$;
 
 select f_delete_data(71, 4);
+
+begin transaction;
+delete from products where name = 'product_3';
+savepoint first_savepoint;
+update products set price = 75 where name = 'product_1';
+savepoint two_savepoint;
+insert into products (name, producer, count, price) VALUES ('product_10', 'producer_5', 50, 100);
+rollback to first_savepoint;
+rollback to two_savepoint;
