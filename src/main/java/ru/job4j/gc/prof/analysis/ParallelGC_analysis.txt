@@ -1,0 +1,52 @@
+# Parallel GC
+Скриншот: Parallel.png
+Метки на скриншоте:
+- "*" - создание массива из 250 000 элементов.
+    Произошла Full GC.
+    Отражение сборки в логе:
+    [94.196s][info][gc] GC(12) Pause Full (Ergonomics) 8M->5M(11M) 11.512ms
+
+- "1" - MergeSort.
+    MergeSort Начало сортировки - 11:11:26.626533400
+    MergeSort Конец сортировки - 11:11:26.764519200
+    Время сборки: ~ 0.137 секунды
+    Произошла Full GC.
+    Отражение сборки в логе:
+    [105.384s][info][gc] GC(15) Pause Young (Allocation Failure) 8M->6M(11M) 0.249ms
+    [105.401s][info][gc] GC(16) Pause Full (Ergonomics) 8M->6M(11M) 15.049ms
+    [105.412s][info][gc] GC(17) Pause Full (Ergonomics) 8M->6M(11M) 9.506ms
+    [105.426s][info][gc] GC(18) Pause Full (Ergonomics) 8M->6M(11M) 12.237ms
+    [105.438s][info][gc] GC(19) Pause Full (Ergonomics) 8M->6M(11M) 8.968ms
+    [105.446s][info][gc] GC(20) Pause Full (Ergonomics) 8M->6M(11M) 7.081ms
+    [105.455s][info][gc] GC(21) Pause Full (Ergonomics) 8M->7M(11M) 7.057ms
+    [105.464s][info][gc] GC(22) Pause Full (Ergonomics) 9M->7M(11M) 7.448ms
+    [105.473s][info][gc] GC(23) Pause Full (Ergonomics) 9M->7M(11M) 6.512ms
+    [105.480s][info][gc] GC(24) Pause Full (Ergonomics) 9M->7M(11M) 5.673ms
+    [105.492s][info][gc] GC(25) Pause Full (Ergonomics) 9M->7M(11M) 11.026ms
+    [105.505s][info][gc] GC(26) Pause Full (Ergonomics) 9M->7M(11M) 11.532ms
+    [105.515s][info][gc] GC(27) Pause Full (Ergonomics) 9M->7M(11M) 8.170ms
+    [111.260s][info][gc] GC(28) Pause Full (Ergonomics) 9M->5M(11M) 9.411ms
+    [131.370s][info][gc] GC(29) Pause Young (Allocation Failure) 7M->5M(11M) 0.649ms
+
+- "2" - InsertSort.
+    InsertSort Начало сортировки - 11:12:00.292962300
+    InsertSort Конец сортировки - 11:12:04.147770800
+    Время сборки: ~ 3.854 секунды
+    Полных сборок мусора не было.
+
+- "3" - BubbleSort.
+    BubbleSort Начало сортировки - 11:12:32.217239100
+    BubbleSort Конец сортировки - 11:13:43.393370500
+    Время сборки: ~ 71.176 секунды
+    Произошла Full GC.
+    Отражение сборки в логе:
+    [195.511s][info][gc] GC(33) Pause Young (Allocation Failure) 8M->6M(11M) 0.801ms
+    [217.575s][info][gc] GC(34) Pause Full (Ergonomics) 8M->6M(11M) 10.490ms
+    [239.614s][info][gc] GC(35) Pause Full (Ergonomics) 8M->6M(11M) 8.745ms
+    [260.900s][info][gc] GC(36) Pause Full (Ergonomics) 8M->5M(11M) 9.930ms
+    [284.038s][info][gc] GC(37) Pause Young (Allocation Failure) 7M->5M(11M) 0.332ms
+
+Выводы:
+1. MergeSort работает быстрее InsertSort и BubbleSort, но вызывает многократные Pause Full.
+2. InsertSort не вызывает Pause Full при нагрузке в 250 000 элементов
+3. BubbleSort самая медленная сортировка и вызывает несколько Pause Full.
