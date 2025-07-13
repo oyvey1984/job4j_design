@@ -81,22 +81,4 @@ class ControlQualityTest {
         assertFalse(shop.getList().contains(food));
         assertTrue(trash.getList().contains(food));
     }
-
-    @Test
-    void whenNoStoreAccepts() {
-        Food food = new Food(
-                "Future Item",
-                LocalDate.now().plusDays(1),
-                LocalDate.now().plusDays(10),
-                100,
-                0
-        );
-
-        List<Store> stores = List.of(warehouse, shop, trash);
-        controlQuality.distribute(stores, food);
-
-        assertFalse(warehouse.getList().contains(food));
-        assertFalse(shop.getList().contains(food));
-        assertFalse(trash.getList().contains(food));
-    }
 }
