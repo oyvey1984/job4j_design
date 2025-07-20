@@ -79,4 +79,12 @@ public class ParkingService {
     int hasFreeSpots(Vehicle vehicle) {
         return 0;
     }
+
+    public List<ParkingSpot> getCarSpots() {
+        return carSpots; // возвращаем список carSpots
+    }
+
+    public List<ParkingSpot> getTruckSpots() {
+        return truckSpots;
+    }
 }
