@@ -1,6 +1,5 @@
 package ru.job4j.ood.lsp.carparking.parking;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.lsp.carparking.cars.Car;
@@ -138,4 +137,20 @@ class ParkingServiceTest {
         assertTrue(parking.getCarSpots().stream().allMatch(ParkingSpot::isFree));
     }
 
+    @Test
+    void whenGetFreeCarSpotsThenSuccessful() {
+        ParkingService parking = new ParkingService(3, 6);
+        parking.add(new Car());
+        parking.add(new Car());
+
+        assertEquals(4, parking.getFreeCarSpots());
+    }
+
+    @Test
+    void whenGetFreeTruckSpotsThenSuccessful() {
+        ParkingService parking = new ParkingService(3, 6);
+        parking.add(new Truck(2));
+
+        assertEquals(2, parking.getFreeTruckSpots());
+    }
 }

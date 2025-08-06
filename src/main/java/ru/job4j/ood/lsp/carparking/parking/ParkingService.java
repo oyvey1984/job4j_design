@@ -5,6 +5,7 @@ import ru.job4j.ood.lsp.carparking.spot.ParkingSpot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ParkingService {
     List<ParkingSpot> truckSpots;
@@ -64,24 +65,65 @@ public class ParkingService {
         return false;
     }
 
-    List<ParkingSpot> getList() {
-        return List.of();
+    public int getFreeCarSpots() {
+        int free = 0;
+        for (ParkingSpot spot : carSpots) {
+            if (spot.isFree()) {
+                free++;
+            }
+        }
+        return free;
+    }
+
+    public int getFreeTruckSpots() {
+        int free = 0;
+        for (ParkingSpot spot : truckSpots) {
+            if (spot.isFree()) {
+                free++;
+            }
+        }
+        return free;
     }
 
     boolean delete(Vehicle vehicle) {
+        if (vehicle.getSize() == 1) {
+            for (ParkingSpot spot : carSpots) {
+                if (Objects.equals(spot.getVehicle(), vehicle)) {
+                    spot.setVehicle(null);
+                    return true;
+                }
+            }
+        } else {
+            for (ParkingSpot spot : truckSpots) {
+                if (Objects.equals(spot.getVehicle(), vehicle)) {
+                    spot.setVehicle(null);
+                    return true;
+                }
+            }
+            boolean removed = false;
+            for (ParkingSpot spot : carSpots) {
+                if (Objects.equals(spot.getVehicle(), vehicle)) {
+                    spot.setVehicle(null);
+                    removed = true;
+                }
+            }
+            return removed;
+        }
         return false;
     }
 
     void removeAll() {
+        for (ParkingSpot spot : carSpots) {
+            spot.setVehicle(null);
+        }
 
-    }
-
-    int hasFreeSpots(Vehicle vehicle) {
-        return 0;
+        for (ParkingSpot spot : truckSpots) {
+            spot.setVehicle(null);
+        }
     }
 
     public List<ParkingSpot> getCarSpots() {
-        return carSpots; // возвращаем список carSpots
+        return carSpots;
     }
 
     public List<ParkingSpot> getTruckSpots() {

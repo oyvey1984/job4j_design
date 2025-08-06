@@ -1,5 +1,7 @@
 package ru.job4j.ood.lsp.carparking.cars;
 
+import java.util.Objects;
+
 public class Truck implements Vehicle {
     private int size;
 
@@ -13,5 +15,19 @@ public class Truck implements Vehicle {
     @Override
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Truck truck = (Truck) o;
+        return size == truck.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(size);
     }
 }
