@@ -81,4 +81,37 @@ class ControlQualityTest {
         assertFalse(shop.getList().contains(food));
         assertTrue(trash.getList().contains(food));
     }
+
+    @Test
+    void whenResort() {
+        Food appleForWarehouse = new Food(
+                "Fresh Apple",
+                LocalDate.now().minusDays(1),
+                LocalDate.now().plusDays(10),
+                100,
+                0
+        );
+        Food breadForShop = new Food(
+                "Bread",
+                LocalDate.now().minusDays(7),
+                LocalDate.now().plusDays(3),
+                100,
+                0
+        );
+        Food milkForTrash = new Food(
+                "Expired Milk",
+                LocalDate.now().minusDays(10),
+                LocalDate.now().minusDays(1),
+                50,
+                0
+        );
+        warehouse.add(breadForShop);
+        shop.add(milkForTrash);
+        trash.add(appleForWarehouse);
+        List<Store> stores = List.of(warehouse, shop, trash);
+        controlQuality.resort(stores);
+        assertTrue(warehouse.getList().contains(appleForWarehouse));
+        assertTrue(shop.getList().contains(breadForShop));
+        assertTrue(trash.getList().contains(milkForTrash));
+    }
 }
