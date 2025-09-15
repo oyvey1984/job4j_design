@@ -74,12 +74,10 @@ class MergeTest {
         }
         int[] sorted = Merge.mergesort(array);
 
-        // Проверяем что массив отсортирован
         for (int i = 0; i < sorted.length - 1; i++) {
             assertThat(sorted[i]).isLessThanOrEqualTo(sorted[i + 1]);
         }
 
-        // Проверяем что отсортированный массив содержит те же элементы
         assertThat(sorted).hasSameSizeAs(array);
         assertThat(sorted).containsExactlyInAnyOrder(array);
     }

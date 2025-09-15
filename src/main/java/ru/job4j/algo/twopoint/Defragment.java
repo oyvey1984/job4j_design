@@ -1,4 +1,4 @@
-package ru.job4j.algo;
+package ru.job4j.algo.twopoint;
 
 public class Defragment {
     public static String[] compress(String[] array) {

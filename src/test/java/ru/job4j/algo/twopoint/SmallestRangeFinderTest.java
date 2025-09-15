@@ -1,6 +1,7 @@
-package ru.job4j.algo;
+package ru.job4j.algo.twopoint;
 
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SmallestRangeFinderTest {

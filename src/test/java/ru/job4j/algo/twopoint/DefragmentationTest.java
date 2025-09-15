@@ -1,7 +1,6 @@
-package ru.job4j.array;
+package ru.job4j.algo.twopoint;
 
 import org.junit.jupiter.api.Test;
-import ru.job4j.algo.Defragmentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
