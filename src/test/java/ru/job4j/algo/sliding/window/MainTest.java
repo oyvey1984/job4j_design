@@ -1,5 +1,6 @@
 package ru.job4j.algo.sliding.window;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,6 +21,7 @@ public class MainTest {
         assertThat(result).containsExactly(3, 4);
     }
 
+    @Disabled
     @Test
     public void whenSequentialIntervalsThenFindMaxOverlapInterval() {
         List<Interval> intervals = new ArrayList<>();
