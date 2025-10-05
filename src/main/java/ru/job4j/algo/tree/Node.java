@@ -3,6 +3,7 @@ package ru.job4j.algo.tree;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Node<E> {
     private E value;
@@ -37,5 +38,19 @@ public class Node<E> {
 
     public void setChildren(List<Node<E>> children) {
         this.children = children;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Node<?> node = (Node<?>) o;
+        return Objects.equals(value, node.value) && Objects.equals(children, node.children);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, children);
     }
 }
