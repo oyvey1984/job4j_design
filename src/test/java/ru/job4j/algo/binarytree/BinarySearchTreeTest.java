@@ -97,4 +97,65 @@ class BinarySearchTreeTest {
         assertThat(tree.inPostOrder()).hasSize(7)
                 .containsExactly(1, 3, 2, 5, 7, 6, 4);
     }
+
+    @Test
+    void whenRemoveLeafNodeThenDeleted() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(10);
+        tree.put(5);
+        tree.put(15);
+        tree.put(3); // leaf
+
+        boolean result = tree.remove(3);
+
+        assertThat(result).isTrue();
+        assertThat(tree.contains(3)).isFalse();
+        assertThat(tree.inSymmetricalOrder()).containsExactly(5, 10, 15);
+    }
+
+    @Test
+    void whenRemoveNodeWithOneChildThenDeleted() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(10);
+        tree.put(5);
+        tree.put(15);
+        tree.put(3);
+        tree.put(1);
+
+        boolean result = tree.remove(3);
+
+        assertThat(result).isTrue();
+        assertThat(tree.contains(3)).isFalse();
+        assertThat(tree.inSymmetricalOrder()).containsExactly(1, 5, 10, 15);
+    }
+
+    @Test
+    void whenRemoveNodeWithTwoChildrenThenDeletedCorrectly() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(10);
+        tree.put(5);
+        tree.put(15);
+        tree.put(3);
+        tree.put(7);
+        tree.put(6);
+        tree.put(8);
+
+        boolean result = tree.remove(5);
+
+        assertThat(result).isTrue();
+        assertThat(tree.contains(5)).isFalse();
+        assertThat(tree.inSymmetricalOrder()).containsExactly(3, 6, 7, 8, 10, 15);
+    }
+
+    @Test
+    void whenRemoveNonExistingThenFalse() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(10);
+        tree.put(5);
+
+        boolean result = tree.remove(99);
+
+        assertThat(result).isFalse();
+        assertThat(tree.inSymmetricalOrder()).containsExactly(5, 10);
+    }
 }
