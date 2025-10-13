@@ -158,4 +158,58 @@ class BinarySearchTreeTest {
         assertThat(result).isFalse();
         assertThat(tree.inSymmetricalOrder()).containsExactly(5, 10);
     }
+
+    @Test
+    public void whenClearThenTreeIsEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(10);
+        tree.put(5);
+        tree.put(15);
+        tree.put(3);
+        tree.put(7);
+
+        assertThat(tree.inSymmetricalOrder()).containsExactly(3, 5, 7, 10, 15);
+        assertThat(tree.minimum()).isEqualTo(3);
+        assertThat(tree.maximum()).isEqualTo(15);
+        assertThat(tree.contains(10)).isTrue();
+        tree.clear();
+
+        assertThat(tree.inSymmetricalOrder()).isEmpty();
+        assertThat(tree.minimum()).isNull();
+        assertThat(tree.maximum()).isNull();
+        assertThat(tree.contains(10)).isFalse();
+    }
+
+    @Test
+    public void whenClearEmptyTreeThenNoException() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.clear();
+        assertThat(tree.inSymmetricalOrder()).isEmpty();
+    }
+
+    @Test
+    public void whenClearSingleNodeTreeThenEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(42);
+        assertThat(tree.contains(42)).isTrue();
+        tree.clear();
+        assertThat(tree.contains(42)).isFalse();
+        assertThat(tree.inSymmetricalOrder()).isEmpty();
+    }
+
+    @Test
+    public void whenClearThenCanReuseTree() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(8);
+        tree.put(4);
+        tree.put(12);
+
+        tree.clear();
+
+        tree.put(100);
+        tree.put(50);
+
+        assertThat(tree.inSymmetricalOrder()).containsExactly(50, 100);
+        assertThat(tree.contains(100)).isTrue();
+    }
 }
